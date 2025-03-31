@@ -27,7 +27,7 @@ public class Lesson3 : EditorWindow
         //层级标签控件
         //layer = EditorGUILayout.LayerField(layer); //这样写就只会有个下拉框,没有说明文本
         layer = EditorGUILayout.LayerField("层级选择", layer);
-        //tag = EditorGUILayout.TagField(tag); //这样写就只会有个下拉框
+        //tag = EditorGUILayout.TagField(tag); //这样写就只会有个下拉框,没有说明文本
         tag = EditorGUILayout.TagField("标签选择", tag);
         //颜色获取控件
         color = EditorGUILayout.ColorField(new GUIContent("自定义颜色获取"),
