@@ -13,9 +13,26 @@ public class Lesson3 : EditorWindow
         win.Show();
     }
 
+    int layer;
+    string tag;
+    Color color;
     private void OnGUI()
     {
         //窗口中的控件相关绘制 逻辑处理相关的内容
+        //EditorGUI相关的控件 同样还是需要在OnGUI当中进行实现 才能被显示出来
+        #region Lesson4 文本控件、层级标签控件、颜色获取控件
+        //文本控件
+        EditorGUILayout.LabelField("文本标题", "测试内容");
+        EditorGUILayout.LabelField("文本内容");
+        //层级标签控件
+        //layer = EditorGUILayout.LayerField(layer); //这样写就只会有个下拉框,没有说明文本
+        layer = EditorGUILayout.LayerField("层级选择", layer);
+        //tag = EditorGUILayout.TagField(tag); //这样写就只会有个下拉框
+        tag = EditorGUILayout.TagField("标签选择", tag);
+        //颜色获取控件
+        color = EditorGUILayout.ColorField(new GUIContent("自定义颜色获取"),
+                                            color, true, false, false);
+        #endregion
     }
 
     // Start is called before the first frame update
