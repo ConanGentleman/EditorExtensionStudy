@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// 如果是多选枚举，需要给每个不同的枚举要赋值为2的次方，这样更方便选择
+/// 如果是多选枚举，需要给每个不同的枚举要赋值为2的次方
 /// </summary>
 public enum E_TestType
 {
@@ -58,7 +58,9 @@ public class Lesson3 : EditorWindow
         type2 = (E_TestType)EditorGUILayout.EnumFlagsField("枚举多选", type2);
 
         //整数选择控件
-        //返回值 其实是整数数组当中的某一个值
+        // strs是每个值的描述
+        // ints是每个描述对应的值
+        //返回值num 是整数数组当中的某一个值，而不是索引
         num = EditorGUILayout.IntPopup("整数单选框", num, strs, ints);
         EditorGUILayout.LabelField(num.ToString());
 
