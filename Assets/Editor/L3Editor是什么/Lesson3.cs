@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// 如果是多选枚举，需要给每个不同的枚举要赋值为2的次方，这样更方便选择
+/// </summary>
+public enum E_TestType
+{
+    One = 1,
+    Two = 2,
+    Three = 4,
+    One_and_Two = 1 | 2,
+}
+
 public class Lesson3 : EditorWindow
 {
     [MenuItem("Unity编辑器拓展/Lesson3/EditorGUI知识讲解窗口")]
@@ -12,10 +23,16 @@ public class Lesson3 : EditorWindow
         //win.titleContent = new GUIContent("EditorGUI知识讲解窗口");
         win.Show();
     }
-
     int layer;
     string tag;
     Color color;
+
+    E_TestType type;
+    E_TestType type2;
+
+    string[] strs = { "选择123", "选择234", "选择345" };
+    int[] ints = { 123, 234, 345 };
+    int num = 0;
     private void OnGUI()
     {
         //窗口中的控件相关绘制 逻辑处理相关的内容
@@ -32,6 +49,22 @@ public class Lesson3 : EditorWindow
         //颜色获取控件
         color = EditorGUILayout.ColorField(new GUIContent("自定义颜色获取"),
                                             color, true, false, false);
+        #endregion
+
+        #region Lesson5 枚举选择、整数选择、按下就触发的按钮
+        //枚举选择
+        type = (E_TestType)EditorGUILayout.EnumPopup("枚举选择", type);
+
+        type2 = (E_TestType)EditorGUILayout.EnumFlagsField("枚举多选", type2);
+
+        //整数选择控件
+        //返回值 其实是整数数组当中的某一个值
+        num = EditorGUILayout.IntPopup("整数单选框", num, strs, ints);
+        EditorGUILayout.LabelField(num.ToString());
+
+        //按下就响应的按钮
+        if (EditorGUILayout.DropdownButton(new GUIContent("按钮上文字"), FocusType.Passive))
+            Debug.Log("按下就响应");
         #endregion
     }
 
