@@ -51,6 +51,9 @@ public class Lesson3 : EditorWindow
     Bounds bounds;
     BoundsInt boundsInt;
 
+    bool isHide;
+    bool isHideGroup;
+
     private void OnGUI()
     {
         //窗口中的控件相关绘制 逻辑处理相关的内容
@@ -70,46 +73,65 @@ public class Lesson3 : EditorWindow
         #endregion
 
         #region Lesson5 枚举选择、整数选择、按下就触发的按钮
-        //枚举选择
-        type = (E_TestType)EditorGUILayout.EnumPopup("枚举选择", type);
 
-        type2 = (E_TestType)EditorGUILayout.EnumFlagsField("枚举多选", type2);
+        isHide = EditorGUILayout.Foldout(isHide, "折叠控件", false);
 
-        //整数选择控件
-        // strs是每个值的描述
-        // ints是每个描述对应的值
-        //返回值num 是整数数组当中的某一个值，而不是索引
-        num = EditorGUILayout.IntPopup("整数单选框", num, strs, ints);
-        EditorGUILayout.LabelField(num.ToString());
+        if (isHide)
+        {
+            //枚举选择
+            type = (E_TestType)EditorGUILayout.EnumPopup("枚举选择", type);
 
-        //按下就响应的按钮
-        if (EditorGUILayout.DropdownButton(new GUIContent("按钮上文字"), FocusType.Passive))
-            Debug.Log("按下就响应");
+            type2 = (E_TestType)EditorGUILayout.EnumFlagsField("枚举多选", type2);
+
+            //整数选择控件
+            // strs是每个值的描述
+            // ints是每个描述对应的值
+            //返回值num 是整数数组当中的某一个值，而不是索引
+            num = EditorGUILayout.IntPopup("整数单选框", num, strs, ints);
+            EditorGUILayout.LabelField(num.ToString());
+
+            //按下就响应的按钮
+            if (EditorGUILayout.DropdownButton(new GUIContent("按钮上文字"), FocusType.Passive))
+                Debug.Log("按下就响应");
+        }
         #endregion
 
         #region Lesson6 对象关联、各类型输入
-        //对象关联 ----对象变量 = EditorGUILayout.ObjectField(对象变量, typeof(对象类型), 是否允许关联场景上对象资源) as 对象类型;
-        obj = EditorGUILayout.ObjectField("关联资源对象", obj, typeof(GameObject), false) as GameObject;
-        //各类型输入
-        i = EditorGUILayout.IntField("Int输入框", i);
-        EditorGUILayout.LabelField(i.ToString());
-        l = EditorGUILayout.LongField("long输入框", l);
-        f = EditorGUILayout.FloatField("Float 输入：", f);
-        d = EditorGUILayout.DoubleField("double 输入：", d);
 
-        str = EditorGUILayout.TextField("Text输入：", str);
-        vec2 = EditorGUILayout.Vector2Field("Vec2输入： ", vec2);
-        vec3 = EditorGUILayout.Vector3Field("Vec3输入： ", vec3);
-        vec4 = EditorGUILayout.Vector4Field("Vec4输入： ", vec4);
+        isHideGroup = EditorGUILayout.BeginFoldoutHeaderGroup(isHideGroup, "折叠组控件");
 
-        rect = EditorGUILayout.RectField("rect输入： ", rect);//矩形变量
-        bounds = EditorGUILayout.BoundsField("Bounds输入： ", bounds);//范围变量
-        boundsInt = EditorGUILayout.BoundsIntField("Bounds输入： ", boundsInt);//范围变量（整型）
+        if (isHideGroup)
+        {
+            //对象关联 ----对象变量 = EditorGUILayout.ObjectField(对象变量, typeof(对象类型), 是否允许关联场景上对象资源) as 对象类型;
+            obj = EditorGUILayout.ObjectField("关联资源对象", obj, typeof(GameObject), false) as GameObject;
+            //各类型输入
+            i = EditorGUILayout.IntField("Int输入框", i);
+            EditorGUILayout.LabelField(i.ToString());
+            l = EditorGUILayout.LongField("long输入框", l);
+            f = EditorGUILayout.FloatField("Float 输入：", f);
+            d = EditorGUILayout.DoubleField("double 输入：", d);
 
-        //注意：EditorGUILayout中还有一些Delayed开头的输入控件
-        //     他们和普通输入控件最主要的区别是：在用户按 Enter 键或将焦点从字段移开之前，返回值不会更改
-        i2 = EditorGUILayout.DelayedIntField("Int输入框", i2);
-        EditorGUILayout.LabelField(i2.ToString());
+            str = EditorGUILayout.TextField("Text输入：", str);
+            vec2 = EditorGUILayout.Vector2Field("Vec2输入： ", vec2);
+            vec3 = EditorGUILayout.Vector3Field("Vec3输入： ", vec3);
+            vec4 = EditorGUILayout.Vector4Field("Vec4输入： ", vec4);
+
+            rect = EditorGUILayout.RectField("rect输入： ", rect);//矩形变量
+            bounds = EditorGUILayout.BoundsField("Bounds输入： ", bounds);//范围变量
+            boundsInt = EditorGUILayout.BoundsIntField("Bounds输入： ", boundsInt);//范围变量（整型）
+
+            //注意：EditorGUILayout中还有一些Delayed开头的输入控件
+            //     他们和普通输入控件最主要的区别是：在用户按 Enter 键或将焦点从字段移开之前，返回值不会更改
+            i2 = EditorGUILayout.DelayedIntField("Int输入框", i2);
+            EditorGUILayout.LabelField(i2.ToString());
+        }
+
+        EditorGUILayout.EndFoldoutHeaderGroup();
+
+        #endregion
+
+        #region Lesson7 折叠、折叠组控件
+        //在上方Lesson5和Lesson6中使用
         #endregion
     }
 
