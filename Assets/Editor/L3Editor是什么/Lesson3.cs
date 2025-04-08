@@ -33,6 +33,24 @@ public class Lesson3 : EditorWindow
     string[] strs = { "选择123", "选择234", "选择345" };
     int[] ints = { 123, 234, 345 };
     int num = 0;
+
+    GameObject obj;
+
+    int i;
+    int i2;
+    float f;
+    double d;
+    long l;
+
+    string str;
+    Vector2 vec2;
+    Vector3 vec3;
+    Vector4 vec4;
+
+    Rect rect;
+    Bounds bounds;
+    BoundsInt boundsInt;
+
     private void OnGUI()
     {
         //窗口中的控件相关绘制 逻辑处理相关的内容
@@ -67,6 +85,31 @@ public class Lesson3 : EditorWindow
         //按下就响应的按钮
         if (EditorGUILayout.DropdownButton(new GUIContent("按钮上文字"), FocusType.Passive))
             Debug.Log("按下就响应");
+        #endregion
+
+        #region Lesson6 对象关联、各类型输入
+        //对象关联 ----对象变量 = EditorGUILayout.ObjectField(对象变量, typeof(对象类型), 是否允许关联场景上对象资源) as 对象类型;
+        obj = EditorGUILayout.ObjectField("关联资源对象", obj, typeof(GameObject), false) as GameObject;
+        //各类型输入
+        i = EditorGUILayout.IntField("Int输入框", i);
+        EditorGUILayout.LabelField(i.ToString());
+        l = EditorGUILayout.LongField("long输入框", l);
+        f = EditorGUILayout.FloatField("Float 输入：", f);
+        d = EditorGUILayout.DoubleField("double 输入：", d);
+
+        str = EditorGUILayout.TextField("Text输入：", str);
+        vec2 = EditorGUILayout.Vector2Field("Vec2输入： ", vec2);
+        vec3 = EditorGUILayout.Vector3Field("Vec3输入： ", vec3);
+        vec4 = EditorGUILayout.Vector4Field("Vec4输入： ", vec4);
+
+        rect = EditorGUILayout.RectField("rect输入： ", rect);//矩形变量
+        bounds = EditorGUILayout.BoundsField("Bounds输入： ", bounds);//范围变量
+        boundsInt = EditorGUILayout.BoundsIntField("Bounds输入： ", boundsInt);//范围变量（整型）
+
+        //注意：EditorGUILayout中还有一些Delayed开头的输入控件
+        //     他们和普通输入控件最主要的区别是：在用户按 Enter 键或将焦点从字段移开之前，返回值不会更改
+        i2 = EditorGUILayout.DelayedIntField("Int输入框", i2);
+        EditorGUILayout.LabelField(i2.ToString());
         #endregion
     }
 
