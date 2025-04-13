@@ -54,6 +54,17 @@ public class Lesson3 : EditorWindow
     bool isHide;
     bool isHideGroup;
 
+    bool isTog;
+    bool isTogLeft;
+
+    bool isTogGroup;
+
+    float fSlider;
+    int iSlider;
+
+    float leftV;
+    float rightV;
+
     private void OnGUI()
     {
         //窗口中的控件相关绘制 逻辑处理相关的内容
@@ -132,6 +143,25 @@ public class Lesson3 : EditorWindow
 
         #region Lesson7 折叠、折叠组控件
         //在上方Lesson5和Lesson6中使用
+        #endregion
+
+        #region Lesson8 开关、开关组控件
+        //开关组控件
+        isTogGroup = EditorGUILayout.BeginToggleGroup("开关组控件", isTogGroup);
+        //开关控件
+        isTog = EditorGUILayout.Toggle("开关控件", isTog);
+        isTogLeft = EditorGUILayout.ToggleLeft("左侧开关", isTogLeft);
+        EditorGUILayout.EndToggleGroup();
+        #endregion
+
+        #region Lesson9 滑动条、双块滑动条控件
+        //滑动条
+        fSlider = EditorGUILayout.Slider("滑动条", fSlider, 0, 10);
+        iSlider = EditorGUILayout.IntSlider("整形滑动条", iSlider, 0, 10);
+        //双块滑动条
+        EditorGUILayout.MinMaxSlider("双块滑动条", ref leftV, ref rightV, 0, 10);
+        EditorGUILayout.LabelField(leftV.ToString());
+        EditorGUILayout.LabelField(rightV.ToString());
         #endregion
     }
 
