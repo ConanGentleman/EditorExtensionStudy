@@ -163,6 +163,18 @@ public class Lesson3 : EditorWindow
         EditorGUILayout.LabelField(leftV.ToString());
         EditorGUILayout.LabelField(rightV.ToString());
         #endregion
+
+        #region Lesson10 帮助框、间隔控件
+        //帮助框控件
+        EditorGUILayout.HelpBox("一般提示", MessageType.None);
+        EditorGUILayout.Space(10);
+        EditorGUILayout.HelpBox("感叹号提示", MessageType.Info);
+        EditorGUILayout.Space(50);
+        EditorGUILayout.HelpBox("警告符号提示", MessageType.Warning);
+        EditorGUILayout.Space(100);
+        EditorGUILayout.HelpBox("错误符号提示", MessageType.Error);
+        //间隔控件
+        #endregion
     }
 
     // Start is called before the first frame update
