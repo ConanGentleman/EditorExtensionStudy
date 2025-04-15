@@ -65,6 +65,10 @@ public class Lesson3 : EditorWindow
     float leftV;
     float rightV;
 
+    AnimationCurve curve = new AnimationCurve();
+
+    Vector2 vec2Pos;
+
     private void OnGUI()
     {
         //窗口中的控件相关绘制 逻辑处理相关的内容
@@ -174,6 +178,32 @@ public class Lesson3 : EditorWindow
         EditorGUILayout.Space(100);
         EditorGUILayout.HelpBox("错误符号提示", MessageType.Error);
         //间隔控件
+        #endregion
+
+        #region Lesson11 动画曲线控件和布局API
+        //动画曲线控件
+        curve = EditorGUILayout.CurveField("曲线控件", curve);
+        //布局API
+        EditorGUILayout.BeginHorizontal(); //开始水平布局
+        EditorGUILayout.LabelField("123123");
+        EditorGUILayout.LabelField("123123");
+        EditorGUILayout.LabelField("123123");
+        EditorGUILayout.EndHorizontal();//结束水平布局
+
+        EditorGUILayout.BeginVertical();//开始垂直布局
+        EditorGUILayout.LabelField("123123");
+        EditorGUILayout.LabelField("123123");
+        EditorGUILayout.LabelField("123123");
+        EditorGUILayout.EndVertical();//结束垂直布局
+
+        vec2Pos = EditorGUILayout.BeginScrollView(vec2Pos); //开启滚动视图
+        //一大堆控件
+        EditorGUILayout.LabelField("滚动1");
+        EditorGUILayout.LabelField("滚动2");
+        EditorGUILayout.LabelField("滚动3");
+        EditorGUILayout.LabelField("滚动4");
+        EditorGUILayout.LabelField("滚动5");
+        EditorGUILayout.EndScrollView(); //结束滚动视图
         #endregion
     }
 
