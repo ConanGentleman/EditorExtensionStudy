@@ -19,7 +19,7 @@ public class Lesson11 : MonoBehaviour
         //EditorGUILayout.BeginVertical();//开始垂直布局
         //一大堆控件
         //EditorGUILayout.EndVertical();//结束垂直布局
-
+          
         //Vector2布局 = EditorGUILayout.BeginScrollView(Vector2布局); //开启滚动视图
         //一大堆控件
         //EditorGUILayout.EndScrollView(); //结束滚动视图
