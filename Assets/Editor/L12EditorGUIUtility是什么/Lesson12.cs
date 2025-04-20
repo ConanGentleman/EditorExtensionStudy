@@ -15,6 +15,8 @@ public class Lesson12 : EditorWindow
     private Texture img;
     private Texture img2;
 
+    private Texture img3;
+
     private void OnGUI()
     {
         #region Lesson13 资源加载
@@ -29,6 +31,34 @@ public class Lesson12 : EditorWindow
             img2 = EditorGUIUtility.LoadRequired("EditorTeach.png") as Texture;
         if (img2 != null)
             GUI.DrawTexture(new Rect(0, 150, 160, 90), img2);//显示图片
+        #endregion
+
+        #region Lesson14 搜索框查询、对象选中提示提示
+        //搜索框查询
+        if (GUILayout.Button("打开搜索框查询窗口"))
+        {
+            EditorGUIUtility.ShowObjectPicker<Texture>(null, false, "Editor", 0);
+        }
+
+        if (Event.current.commandName == "ObjectSelectorUpdated")
+        {
+            img3 = EditorGUIUtility.GetObjectPickerObject() as Texture;
+            if (img3 != null)
+                Debug.Log(img3.name);
+        }
+        else if (Event.current.commandName == "ObjectSelectorClosed")
+        {
+            img3 = EditorGUIUtility.GetObjectPickerObject() as Texture;
+            if (img3 != null)
+                Debug.Log("窗口关闭 - " + img3.name);
+        }
+
+        //对象选中提示提示
+        if (GUILayout.Button("高亮选中对象"))
+        {
+            if (img3 != null)
+                EditorGUIUtility.PingObject(img3);
+        }
         #endregion
     }
 
