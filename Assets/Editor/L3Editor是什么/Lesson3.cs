@@ -205,6 +205,16 @@ public class Lesson3 : EditorWindow
         EditorGUILayout.LabelField("滚动5");
         EditorGUILayout.EndScrollView(); //结束滚动视图
         #endregion
+
+        #region  Lesson15 窗口事件传递、坐标转换
+        if (Event.current.type == EventType.ExecuteCommand)//收到来自Lesson12中win.SendEvent(e)窗口信息传递的内容
+        {
+            if (Event.current.commandName == "测试事件")
+            {
+                Debug.Log("收到测试事件");
+            }
+        }
+        #endregion
     }
 
     // Start is called before the first frame update

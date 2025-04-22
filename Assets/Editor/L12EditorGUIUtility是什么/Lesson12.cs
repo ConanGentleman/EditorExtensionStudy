@@ -60,6 +60,38 @@ public class Lesson12 : EditorWindow
                 EditorGUIUtility.PingObject(img3);
         }
         #endregion
+
+        #region Lesson15 窗口事件传递、坐标转换
+        //窗口事件传递
+        if (GUILayout.Button("传递事件"))
+        {
+            //声明事件
+            Event e = EditorGUIUtility.CommandEvent("测试事件");
+            Lesson3 win = EditorWindow.GetWindow<Lesson3>();
+            win.SendEvent(e);
+        }
+
+        //if (Event.current.type == EventType.ExecuteCommand)
+        //{
+        //    if (Event.current.commandName == "测试事件")
+        //    {
+        //        Debug.Log("收到测试事件");
+        //    }
+        //}
+
+        //坐标转换
+        if (GUILayout.Button("坐标转换测试"))
+        {
+            Vector2 v = new Vector2(10, 10);//GUI坐标
+            GUI.BeginGroup(new Rect(10, 10, 100, 100));
+            //转换函数 如果包裹在布局相关函数中 那么位置会加上布局的偏移 再进行转换
+            Vector2 screenPos = EditorGUIUtility.GUIToScreenPoint(v);
+            GUI.EndGroup();
+            Debug.Log("GUI:" + v + "Screen:" + screenPos);
+        }
+
+
+        #endregion
     }
 
     // Start is called before the first frame update
