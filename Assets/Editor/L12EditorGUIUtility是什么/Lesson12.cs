@@ -17,6 +17,10 @@ public class Lesson12 : EditorWindow
 
     private Texture img3;
 
+    private Color color;
+
+    private AnimationCurve curve = new AnimationCurve();
+
     private void OnGUI()
     {
         #region Lesson13 资源加载
@@ -90,7 +94,22 @@ public class Lesson12 : EditorWindow
             Debug.Log("GUI:" + v + "Screen:" + screenPos);
         }
 
+        #endregion
 
+        #region Lesson16 指定区域使用对应鼠标指针
+        EditorGUI.DrawRect(new Rect(0, 180, 100, 100), Color.green);
+        EditorGUIUtility.AddCursorRect(new Rect(0, 180, 100, 100), MouseCursor.Text);
+        #endregion
+
+        #region Lesson17 绘制色板、绘制曲线
+        //绘制色板
+        color = EditorGUILayout.ColorField(new GUIContent("选取颜色"), color, true, true, true);
+
+        EditorGUIUtility.DrawColorSwatch(new Rect(180, 180, 30, 30), Color.blue);
+
+        //绘制曲线
+        curve = EditorGUILayout.CurveField("曲线设置", curve);
+        EditorGUIUtility.DrawCurveSwatch(new Rect(0, 300, 100, 80), curve, null, Color.red, Color.white);
         #endregion
     }
 
