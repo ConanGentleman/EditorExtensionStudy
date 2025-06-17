@@ -1,69 +1,69 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Lesson22 : MonoBehaviour
 {
-    //¹¥»÷Á¦
+    //æ”»å‡»åŠ›
     public int atk;
-    //·ÀÓùÁ¦
+    //é˜²å¾¡åŠ›
     public float def;
-    //µĞ¶ÔÄ¿±ê¶ÔÏóÒÀ¸½µÄGameobject
+    //æ•Œå¯¹ç›®æ ‡å¯¹è±¡ä¾é™„çš„Gameobject
     public GameObject obj;
 
     // Start is called before the first frame update
     void Start()
     {
-        #region ÖªÊ¶µãÒ» Inspector´°¿Ú×Ô¶¨ÒåÏÔÊ¾Ö¸Ê²Ã´£¿
-        //ÎÒ¿ÉÒÔÍêÈ«×Ô¶¨ÒåÄ³Ò»¸ö½Å±¾ÔÚInspector´°¿ÚµÄÏà¹ØÏÔÊ¾
+        #region çŸ¥è¯†ç‚¹ä¸€ Inspectorçª—å£è‡ªå®šä¹‰æ˜¾ç¤ºæŒ‡ä»€ä¹ˆï¼Ÿ
+        //æˆ‘å¯ä»¥å®Œå…¨è‡ªå®šä¹‰æŸä¸€ä¸ªè„šæœ¬åœ¨Inspectorçª—å£çš„ç›¸å…³æ˜¾ç¤º
         #endregion
 
-        #region ÖªÊ¶µã¶ş SerializedObjectºÍSerializedPropertyµÄ×÷ÓÃ
-        //SerializedObject ºÍ SerializedProperty
-        //Ö÷ÒªÓÃÓÚÔÚ Unity ±à¼­Æ÷ÖĞ²Ù×÷ºÍĞŞ¸ÄĞòÁĞ»¯¶ÔÏóµÄÊôĞÔ¡£
-        //ËüÃÇÍ¨³£ÔÚ×Ô¶¨Òå±à¼­Æ÷ÖĞÊ¹ÓÃ£¬ÒÔ´´½¨¸üÁé»î¡¢¿É¶¨ÖÆµÄÊôĞÔÃæ°å
+        #region çŸ¥è¯†ç‚¹äºŒ SerializedObjectå’ŒSerializedPropertyçš„ä½œç”¨
+        //SerializedObject å’Œ SerializedProperty
+        //ä¸»è¦ç”¨äºåœ¨ Unity ç¼–è¾‘å™¨ä¸­æ“ä½œå’Œä¿®æ”¹åºåˆ—åŒ–å¯¹è±¡çš„å±æ€§ã€‚
+        //å®ƒä»¬é€šå¸¸åœ¨è‡ªå®šä¹‰ç¼–è¾‘å™¨ä¸­ä½¿ç”¨ï¼Œä»¥åˆ›å»ºæ›´çµæ´»ã€å¯å®šåˆ¶çš„å±æ€§é¢æ¿
 
-        //ÎÒÃÇÖ»ĞèÒª¼Ç×¡¼òµ¥µÄ¹æÔò
-        //SerializedObject ´ú±í½Å±¾¶ÔÏó
-        //SerializedProperty ´ú±í½Å±¾¶ÔÏóÖĞµÄÊôĞÔ
+        //æˆ‘ä»¬åªéœ€è¦è®°ä½ç®€å•çš„è§„åˆ™
+        //SerializedObject ä»£è¡¨è„šæœ¬å¯¹è±¡
+        //SerializedProperty ä»£è¡¨è„šæœ¬å¯¹è±¡ä¸­çš„å±æ€§
 
         //SerializedObject: https://docs.unity.cn/cn/2022.1/ScriptReference/SerializedObject.html
         //SerializedProperty: https://docs.unity.cn/cn/2022.1/ScriptReference/SerializedProperty.html
         #endregion
 
-        #region ÖªÊ¶µãÈı ×Ô¶¨Òå ½Å±¾ÔÚInspector´°¿ÚÖĞÏÔÊ¾µÄÄÚÈİ
-        //¹Ø¼ü²½Öè£º
-        //1.µ¥¶ÀÎªÄ³Ò»¸ö½Å±¾ÊµÏÖÒ»¸ö×Ô¶¨Òå½Å±¾£¬²¢ÇÒ½Å±¾ĞèÒª¼Ì³ĞEditor
-        //  Ò»°ã¸Ã½Å±¾ÃüÃûÎª ×Ô¶¨Òå½Å±¾Ãû + Editor
-        //2.ÔÚ¸Ã½Å±¾Ç°¼ÓÉÏÌØĞÔ
-        //  ÃüÃû¿Õ¼ä£ºUnityEditor
-        //  ÌØĞÔÃû£ºCustomEditor(ÏëÒª×Ô¶¨Òå½Å±¾ÀàÃûµÄType)
-        //3.ÉùÃ÷¶ÔÓ¦SerializedPropertyĞòÁĞ»¯ÊôĞÔ ¶ÔÏó
-        //  Ö÷ÒªÍ¨¹ıËüºÍ×Ô¶¨Òå½Å±¾ÖĞµÄ³ÉÔ±½øĞĞ¹ØÁª
-        //  ¿ÉÒÔÀûÓÃ¼Ì³ĞEditorºóµÄ³ÉÔ±serializedObjectÖĞµÄFindProperty("³ÉÔ±±äÁ¿Ãû")·½·¨¹ØÁª¶ÔÓ¦³ÉÔ±;
-        //  ±ÈÈç£ºSerializedProperty mySerializedProperty;
-        //        mySerializedProperty = serializedObject.FindProperty("×Ô¶¨Òå½Å±¾ÖĞµÄ³ÉÔ±Ãû");
-        //  Ò»°ãÔÚOnEnableº¯ÊıÖĞ³õÊ¼»¯
-        //4.ÖØĞ´OnInspectorGUIº¯Êı
-        //  ¸Ãº¯Êı¿ØÖÆÁËInspector´°¿ÚÖĞÏÔÊ¾µÄÄÚÈİ
-        //  Ö»ĞèÒªÔÚÆäÖĞÖØĞ´ÄÚÈİ±ã¿ÉÒÔ×Ô¶¨Òå´°¿Ú
-        //  ×¢Òâ£ºÆäÖĞµÄÂß¼­ĞèÒª°ü¹üÔÚÕâÁ½¾ä´úÂëÖ®¼ä
+        #region çŸ¥è¯†ç‚¹ä¸‰ è‡ªå®šä¹‰ è„šæœ¬åœ¨Inspectorçª—å£ä¸­æ˜¾ç¤ºçš„å†…å®¹
+        //å…³é”®æ­¥éª¤ï¼š
+        //1.å•ç‹¬ä¸ºæŸä¸€ä¸ªè„šæœ¬å®ç°ä¸€ä¸ªè‡ªå®šä¹‰è„šæœ¬ï¼Œå¹¶ä¸”è„šæœ¬éœ€è¦ç»§æ‰¿Editor
+        //  ä¸€èˆ¬è¯¥è„šæœ¬å‘½åä¸º è‡ªå®šä¹‰è„šæœ¬å + Editor
+        //2.åœ¨è¯¥è„šæœ¬å‰åŠ ä¸Šç‰¹æ€§
+        //  å‘½åç©ºé—´ï¼šUnityEditor
+        //  ç‰¹æ€§åï¼šCustomEditor(æƒ³è¦è‡ªå®šä¹‰è„šæœ¬ç±»åçš„Type)
+        //3.å£°æ˜å¯¹åº”SerializedPropertyåºåˆ—åŒ–å±æ€§ å¯¹è±¡
+        //  ä¸»è¦é€šè¿‡å®ƒå’Œè‡ªå®šä¹‰è„šæœ¬ä¸­çš„æˆå‘˜è¿›è¡Œå…³è”
+        //  å¯ä»¥åˆ©ç”¨ç»§æ‰¿Editoråçš„æˆå‘˜serializedObjectä¸­çš„FindProperty("æˆå‘˜å˜é‡å")æ–¹æ³•å…³è”å¯¹åº”æˆå‘˜;
+        //  æ¯”å¦‚ï¼šSerializedProperty mySerializedProperty;
+        //        mySerializedProperty = serializedObject.FindProperty("è‡ªå®šä¹‰è„šæœ¬ä¸­çš„æˆå‘˜å");
+        //  ä¸€èˆ¬åœ¨OnEnableå‡½æ•°ä¸­åˆå§‹åŒ–
+        //4.é‡å†™OnInspectorGUIå‡½æ•°
+        //  è¯¥å‡½æ•°æ§åˆ¶äº†Inspectorçª—å£ä¸­æ˜¾ç¤ºçš„å†…å®¹
+        //  åªéœ€è¦åœ¨å…¶ä¸­é‡å†™å†…å®¹ä¾¿å¯ä»¥è‡ªå®šä¹‰çª—å£
+        //  æ³¨æ„ï¼šå…¶ä¸­çš„é€»è¾‘éœ€è¦åŒ…è£¹åœ¨è¿™ä¸¤å¥ä»£ç ä¹‹é—´
 
-        //  ¸üĞÂĞòÁĞ»¯¶ÔÏóµÄ±íÊ¾ĞÎÊ½
+        //  æ›´æ–°åºåˆ—åŒ–å¯¹è±¡çš„è¡¨ç¤ºå½¢å¼
         //  serializedObject.Update();
-        //  Ö®¼äÓ¦ÓÃÊôĞÔĞŞ¸Ä
+        //  ä¹‹é—´åº”ç”¨å±æ€§ä¿®æ”¹
         //  serializedObject.ApplyModifiedProperties();
         #endregion
 
-        #region ÖªÊ¶µãËÄ »ñÈ¡½Å±¾ÒÀ¸½µÄ¶ÔÏó
-        //EditorÖĞµÄtarget³ÉÔ±±äÁ¿
+        #region çŸ¥è¯†ç‚¹å›› è·å–è„šæœ¬ä¾é™„çš„å¯¹è±¡
+        //Editorä¸­çš„targetæˆå‘˜å˜é‡
         #endregion
 
-        #region ×Ü½á
-        //ÎÒÃÇÎª¼Ì³ĞEditorµÄ½Å±¾
-        //Ìí¼Ó[CustomEditor(typeof(ÏëÒª×Ô¶¨ÒåInspector´°¿ÚµÄ½Å±¾))]ÌØĞÔ
-        //ÔÚ¸Ã½Å±¾ÖĞ°´ÕÕÒ»¶¨µÄ¹æÔò½øĞĞ±àĞ´
-        //±ã¿ÉÎªInspector´°¿ÚÖĞµÄÄ³¸ö½Å±¾×Ô¶¨Òå´°¿Ú²¼¾Ö
+        #region æ€»ç»“
+        //æˆ‘ä»¬ä¸ºç»§æ‰¿Editorçš„è„šæœ¬
+        //æ·»åŠ [CustomEditor(typeof(æƒ³è¦è‡ªå®šä¹‰Inspectorçª—å£çš„è„šæœ¬))]ç‰¹æ€§
+        //åœ¨è¯¥è„šæœ¬ä¸­æŒ‰ç…§ä¸€å®šçš„è§„åˆ™è¿›è¡Œç¼–å†™
+        //ä¾¿å¯ä¸ºInspectorçª—å£ä¸­çš„æŸä¸ªè„šæœ¬è‡ªå®šä¹‰çª—å£å¸ƒå±€
         #endregion
     }
 
