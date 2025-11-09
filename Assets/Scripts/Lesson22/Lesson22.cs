@@ -1,6 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable] //想在inspector窗口上显示则 必加该特性 
+public class MyCustonPro
+{
+    public int i;
+    public float f;
+}
 
 public class Lesson22 : MonoBehaviour
 {
@@ -10,6 +18,14 @@ public class Lesson22 : MonoBehaviour
     public float def;
     //敌对目标对象依附的Gameobject
     public GameObject obj;
+
+    public string[] strs;
+    public int[] ints;
+    public GameObject[] gameObjects;
+
+    public List<GameObject> listObjs;
+
+    public MyCustonPro myCustom;
 
     // Start is called before the first frame update
     void Start()
