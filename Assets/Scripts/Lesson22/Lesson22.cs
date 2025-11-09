@@ -10,7 +10,7 @@ public class MyCustonPro
     public float f;
 }
 
-public class Lesson22 : MonoBehaviour
+public class Lesson22 : MonoBehaviour, ISerializationCallbackReceiver
 {
     //攻击力
     public int atk;
@@ -26,6 +26,39 @@ public class Lesson22 : MonoBehaviour
     public List<GameObject> listObjs;
 
     public MyCustonPro myCustom;
+
+    public Dictionary<int, string> myDic = new Dictionary<int, string>() { { 1, "123" }, { 2, "234" } };
+
+    [SerializeField]
+    private List<int> keys = new List<int>();
+    [SerializeField]
+    private List<string> values = new List<string>();
+
+    //反序列化之后自动调用
+    public void OnAfterDeserialize()
+    {
+        myDic.Clear();
+        for (int i = 0; i < keys.Count; i++)
+        {
+            if (!myDic.ContainsKey(keys[i]))
+                myDic.Add(keys[i], values[i]);
+            else
+                Debug.LogWarning("字典Dictionary容器中不允许有相同的键");
+        }
+    }
+
+    //序列化之前自动调用
+    public void OnBeforeSerialize()
+    {
+        keys.Clear();
+        values.Clear();
+        foreach (var item in myDic)
+        {
+            keys.Add(item.Key);
+            values.Add(item.Value);
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -81,6 +114,11 @@ public class Lesson22 : MonoBehaviour
         //在该脚本中按照一定的规则进行编写
         //便可为Inspector窗口中的某个脚本自定义窗口布局
         #endregion
+
+        foreach (var item in myDic)
+        {
+            print($"Dic:{item.Key} - {item.Value}");
+        }
     }
 
     // Update is called once per frame

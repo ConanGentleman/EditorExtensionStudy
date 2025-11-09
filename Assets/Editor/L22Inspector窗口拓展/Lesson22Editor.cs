@@ -21,6 +21,11 @@ public class Lesson22Editor : Editor
     private SerializedProperty myCustomI;
     private SerializedProperty myCustomF;
 
+    private SerializedProperty keys;
+    private SerializedProperty values;
+
+    private int dicCount;
+
     private int count;
 
     private bool foldOut;
@@ -35,7 +40,6 @@ public class Lesson22Editor : Editor
         strs = serializedObject.FindProperty("strs"); 
         ints = serializedObject.FindProperty("ints"); 
         gameObjects = serializedObject.FindProperty("gameObjects"); 
-
         listObjs = serializedObject.FindProperty("listObjs");
 
         myCustom = serializedObject.FindProperty("myCustom");
@@ -45,8 +49,13 @@ public class Lesson22Editor : Editor
         myCustomI = serializedObject.FindProperty("myCustom.i");
         myCustomF = serializedObject.FindProperty("myCustom.f");
 
+        keys = serializedObject.FindProperty("keys");
+        values = serializedObject.FindProperty("values");
+
         //初始化当前容量 否则 每次一开始都是0
         count = listObjs.arraySize;
+
+        dicCount = keys.arraySize;
     }
 
     //  该函数控制了Inspector窗口中显示的内容
@@ -103,6 +112,31 @@ public class Lesson22Editor : Editor
 
         myCustomI.intValue = EditorGUILayout.IntField("自定义属性中的I", myCustomI.intValue);
         myCustomF.floatValue = EditorGUILayout.FloatField("自定义属性中的F", myCustomF.floatValue);
+
+        dicCount = EditorGUILayout.IntField("字典容量", dicCount);
+        //容量变少时 把多的删了
+        for (int i = keys.arraySize - 1; i >= dicCount; i--)
+        {
+            keys.DeleteArrayElementAtIndex(i);
+            values.DeleteArrayElementAtIndex(i);
+        }
+
+        for (int i = 0; i < dicCount; i++)
+        {
+            //如果容量不够 扩容
+            if (keys.arraySize <= i)
+            {
+                keys.InsertArrayElementAtIndex(i);
+                values.InsertArrayElementAtIndex(i);
+            }
+            //去真正的自定义键值对的修改
+            SerializedProperty indexKey = keys.GetArrayElementAtIndex(i);
+            SerializedProperty indexValue = values.GetArrayElementAtIndex(i);
+            EditorGUILayout.BeginHorizontal();
+            indexKey.intValue = EditorGUILayout.IntField("字典的键", indexKey.intValue);
+            indexValue.stringValue = EditorGUILayout.TextField("字典的值", indexValue.stringValue);
+            EditorGUILayout.EndHorizontal();
+        }
 
         serializedObject.ApplyModifiedProperties();
     }
