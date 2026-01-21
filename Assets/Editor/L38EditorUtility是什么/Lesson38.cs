@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 public class Lesson38 : EditorWindow
 {
+    private GameObject objTest1;
     private float value;
     [MenuItem("Unity编辑器拓展/Lesson38/EditorUtility知识讲解")]
     private static void OpenLesson38Win()
@@ -64,6 +66,60 @@ public class Lesson38 : EditorWindow
             EditorUtility.ClearProgressBar();
         }
 
+        #endregion
+
+        #region Lesson40 文件面板相关
+        //1.显示文件存储面板
+        if (GUILayout.Button("打开文件存储面板"))
+        {
+            string str = EditorUtility.SaveFilePanel("保存我的文件", Application.dataPath, "Test", "txt");
+            Debug.Log(str);
+            if (str != "")
+                File.WriteAllText(str, "123123123123123");
+        }
+        //2.显示文件存储面板（默认为工程目录中）
+        if (GUILayout.Button("打开文件存储面板（仅限工程文件夹下）"))
+        {
+            string str2 = EditorUtility.SaveFilePanelInProject("保存项目内的文件", "Test2", "png", "自定义文件");
+            Debug.Log(str2);
+        }
+        //3.显示文件夹存储面板
+        if (GUILayout.Button("显示文件夹存储面板"))
+        {
+            string str3 = EditorUtility.SaveFolderPanel("得到一个存储路径（文件夹）", Application.dataPath, "");
+            Debug.Log(str3);
+        }
+
+        //4.显示打开文件面板
+        if (GUILayout.Button("显示打开文件面板"))
+        {
+            string str4 = EditorUtility.OpenFilePanel("得到一个文件路径", Application.dataPath, "txt");
+            if (str4 != "")
+            {
+                string txt = File.ReadAllText(str4);
+                Debug.Log(txt);
+            }
+        }
+
+        //5.显示打开文件夹面板
+        if (GUILayout.Button("显示打开文件夹面板"))
+        {
+            string str4 = EditorUtility.OpenFolderPanel("得到一个文件路径", Application.dataPath, "");
+            if (str4 != "")
+            {
+                Debug.Log(str4);
+            }
+        }
+
+        #endregion
+
+        #region Lesson41 其他内容
+        objTest1 = EditorGUILayout.ObjectField("想要查找关联资源的对象", objTest1, typeof(GameObject), true) as GameObject;
+        if (GUILayout.Button("检索依赖资源"))
+        {
+            Object[] objs = EditorUtility.CollectDependencies(new Object[] { objTest1 });
+            Selection.objects = objs;
+        }
         #endregion
     }
 
